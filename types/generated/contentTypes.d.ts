@@ -876,6 +876,11 @@ export interface ApiGenresGenres extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     seoTitle: Attribute.String;
+    program: Attribute.Relation<
+      'api::genres.genres',
+      'manyToOne',
+      'api::programs.programs'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -976,6 +981,11 @@ export interface ApiPersonsPersons extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
     asset: Attribute.Media;
+    program: Attribute.Relation<
+      'api::persons.persons',
+      'manyToOne',
+      'api::programs.programs'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1008,6 +1018,11 @@ export interface ApiPgRatingsPgRatings extends Schema.CollectionType {
     rating: Attribute.String & Attribute.Required;
     title: Attribute.String;
     schema: Attribute.String;
+    program: Attribute.Relation<
+      'api::pg-ratings.pg-ratings',
+      'manyToOne',
+      'api::programs.programs'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1032,6 +1047,7 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
     singularName: 'programs';
     pluralName: 'program';
     displayName: 'Programs';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1071,6 +1087,22 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
     streamQuality: Attribute.Enumeration<
       ['SD_420p', 'HD_720p', 'FHD_1080p', 'UHD_2160p']
     >;
+    people: Attribute.Relation<
+      'api::programs.programs',
+      'oneToMany',
+      'api::persons.persons'
+    >;
+    genres: Attribute.Relation<
+      'api::programs.programs',
+      'oneToMany',
+      'api::genres.genres'
+    >;
+    pg_ratings: Attribute.Relation<
+      'api::programs.programs',
+      'oneToMany',
+      'api::pg-ratings.pg-ratings'
+    >;
+    asset: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "legal_infos",
+  "info": {
+    "singularName": "legal-info",
+    "pluralName": "legal-infos",
+    "displayName": "Legal Info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "terms": {
+      "type": "blocks"
+    },
+    "impressum": {
+      "type": "blocks"
+    },
+    "data": {
+      "type": "blocks"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pg_rating",
+  "info": {
+    "singularName": "pg-ratings",
+    "pluralName": "pg-rating",
+    "displayName": "PG Ratings"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rating": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "string"
+    },
+    "program": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::programs.programs",
+      "inversedBy": "pg_ratings"
+    }
+  }
+}
