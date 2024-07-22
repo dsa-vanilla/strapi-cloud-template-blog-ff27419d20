@@ -512,6 +512,12 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     releasedAt: Attribute.DateTime;
+    scheduledAt: Attribute.DateTime;
+    timezone: Attribute.String;
+    status: Attribute.Enumeration<
+      ['ready', 'blocked', 'failed', 'done', 'empty']
+    > &
+      Attribute.Required;
     actions: Attribute.Relation<
       'plugin::content-releases.release',
       'oneToMany',
@@ -566,6 +572,7 @@ export interface PluginContentReleasesReleaseAction
       'manyToOne',
       'plugin::content-releases.release'
     >;
+    isEntryValid: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -781,82 +788,173 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.SingleType {
-  collectionName: 'abouts';
+export interface ApiCategoriesCategories extends Schema.CollectionType {
+  collectionName: 'category';
   info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'About';
-    description: 'Write about yourself and the content you create';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String;
-    blocks: Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiArticleArticle extends Schema.CollectionType {
-  collectionName: 'articles';
-  info: {
-    singularName: 'article';
-    pluralName: 'articles';
-    displayName: 'Article';
-    description: 'Create your blog content';
+    singularName: 'categories';
+    pluralName: 'category';
+    displayName: 'Categories';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    description: Attribute.Text &
-      Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
-    slug: Attribute.UID<'api::article.article', 'title'>;
-    cover: Attribute.Media;
-    author: Attribute.Relation<
-      'api::article.article',
-      'manyToOne',
-      'api::author.author'
+    description: Attribute.Blocks;
+    name: Attribute.String;
+    ssoTitle: Attribute.String;
+    templateType: Attribute.Enumeration<
+      [
+        'hero',
+        'editorial',
+        'promo',
+        'latest',
+        'genre',
+        'query',
+        'resumeWatching'
+      ]
     >;
+    packshotType: Attribute.Enumeration<['landscape', 'portrait']> &
+      Attribute.DefaultTo<'landscape'>;
+    page: Attribute.Relation<
+      'api::categories.categories',
+      'oneToOne',
+      'api::pages.pages'
+    >;
+    asset: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categories.categories',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categories.categories',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFaqFaq extends Schema.SingleType {
+  collectionName: 'faqs';
+  info: {
+    singularName: 'faq';
+    pluralName: 'faqs';
+    displayName: 'FAQ';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    faq: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGenresGenres extends Schema.CollectionType {
+  collectionName: 'genre';
+  info: {
+    singularName: 'genres';
+    pluralName: 'genre';
+    displayName: 'Genres';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    seoTitle: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::genres.genres',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::genres.genres',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLegalInfoLegalInfo extends Schema.SingleType {
+  collectionName: 'legal_infos';
+  info: {
+    singularName: 'legal-info';
+    pluralName: 'legal-infos';
+    displayName: 'Legal Info';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    terms: Attribute.Blocks;
+    impressum: Attribute.Blocks;
+    data: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::legal-info.legal-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::legal-info.legal-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPagesPages extends Schema.CollectionType {
+  collectionName: 'page';
+  info: {
+    singularName: 'pages';
+    pluralName: 'page';
+    displayName: 'Pages';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    key: Attribute.UID;
+    title: Attribute.String;
     category: Attribute.Relation<
-      'api::article.article',
-      'manyToOne',
-      'api::category.category'
-    >;
-    blocks: Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
+      'api::pages.pages',
+      'oneToOne',
+      'api::categories.categories'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::article.article',
+      'api::pages.pages',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::article.article',
+      'api::pages.pages',
       'oneToOne',
       'admin::user'
     > &
@@ -864,36 +962,126 @@ export interface ApiArticleArticle extends Schema.CollectionType {
   };
 }
 
-export interface ApiAuthorAuthor extends Schema.CollectionType {
-  collectionName: 'authors';
+export interface ApiPersonsPersons extends Schema.CollectionType {
+  collectionName: 'person';
   info: {
-    singularName: 'author';
-    pluralName: 'authors';
-    displayName: 'Author';
-    description: 'Create authors for your content';
+    singularName: 'persons';
+    pluralName: 'person';
+    displayName: 'Persons';
+    description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    asset: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::persons.persons',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::persons.persons',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPgRatingsPgRatings extends Schema.CollectionType {
+  collectionName: 'pg_rating';
+  info: {
+    singularName: 'pg-ratings';
+    pluralName: 'pg-rating';
+    displayName: 'PG Ratings';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    rating: Attribute.String & Attribute.Required;
+    title: Attribute.String;
+    schema: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::pg-ratings.pg-ratings',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::pg-ratings.pg-ratings',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProgramsPrograms extends Schema.CollectionType {
+  collectionName: 'program';
+  info: {
+    singularName: 'programs';
+    pluralName: 'program';
+    displayName: 'Programs';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks;
+    year: Attribute.Integer;
+    availability: Attribute.Boolean;
+    processed: Attribute.Boolean;
+    duration: Attribute.BigInteger;
     name: Attribute.String;
-    avatar: Attribute.Media;
-    email: Attribute.String;
-    articles: Attribute.Relation<
-      'api::author.author',
-      'oneToMany',
-      'api::article.article'
+    enumeration: Attribute.Enumeration<
+      [
+        'season',
+        'episode',
+        'movie',
+        'series',
+        'seasonMovies',
+        'seriesMovies',
+        'unknown'
+      ]
+    >;
+    episodeNumber: Attribute.Integer;
+    seasonNumber: Attribute.Integer;
+    studioAssetID: Attribute.String;
+    seoTitle: Attribute.String;
+    parentStudioAssetID: Attribute.String;
+    contentPartner: Attribute.String;
+    studio: Attribute.String;
+    mediaInfoOutput: Attribute.JSON;
+    genreText: Attribute.String;
+    imdbID: Attribute.String;
+    childrenOrderedIDs: Attribute.JSON;
+    parentPublishStatus: Attribute.JSON;
+    enforceHls: Attribute.Boolean;
+    streamQuality: Attribute.Enumeration<
+      ['SD_420p', 'HD_720p', 'FHD_1080p', 'UHD_2160p']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::author.author',
+      'api::programs.programs',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::author.author',
+      'api::programs.programs',
       'oneToOne',
       'admin::user'
     > &
@@ -901,69 +1089,36 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
+export interface ApiWatchHistoriesWatchHistories extends Schema.CollectionType {
+  collectionName: 'watch_history';
   info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-    description: 'Organize your content into categories';
+    singularName: 'watch-histories';
+    pluralName: 'watch-history';
+    displayName: 'Watch histories';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
-    slug: Attribute.UID;
-    articles: Attribute.Relation<
-      'api::category.category',
-      'oneToMany',
-      'api::article.article'
-    >;
-    description: Attribute.Text;
+    userID: Attribute.String;
+    studioAssetID: Attribute.String;
+    progressPercent: Attribute.Float;
+    progressSeconds: Attribute.Integer;
+    programID: Attribute.Integer;
+    seasonNumber: Attribute.Integer;
+    episodeNumber: Attribute.Integer;
+    episodeTitle: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::category.category',
+      'api::watch-histories.watch-histories',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGlobalGlobal extends Schema.SingleType {
-  collectionName: 'globals';
-  info: {
-    singularName: 'global';
-    pluralName: 'globals';
-    displayName: 'Global';
-    description: 'Define global settings';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    siteName: Attribute.String & Attribute.Required;
-    favicon: Attribute.Media;
-    siteDescription: Attribute.Text & Attribute.Required;
-    defaultSeo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::global.global',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::global.global',
+      'api::watch-histories.watch-histories',
       'oneToOne',
       'admin::user'
     > &
@@ -989,11 +1144,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::about.about': ApiAboutAbout;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
-      'api::category.category': ApiCategoryCategory;
-      'api::global.global': ApiGlobalGlobal;
+      'api::categories.categories': ApiCategoriesCategories;
+      'api::faq.faq': ApiFaqFaq;
+      'api::genres.genres': ApiGenresGenres;
+      'api::legal-info.legal-info': ApiLegalInfoLegalInfo;
+      'api::pages.pages': ApiPagesPages;
+      'api::persons.persons': ApiPersonsPersons;
+      'api::pg-ratings.pg-ratings': ApiPgRatingsPgRatings;
+      'api::programs.programs': ApiProgramsPrograms;
+      'api::watch-histories.watch-histories': ApiWatchHistoriesWatchHistories;
     }
   }
 }
