@@ -33,6 +33,12 @@
     },
     "format_id": {
       "type": "integer"
+    },
+    "clips": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::clip.clip",
+      "mappedBy": "format"
     }
   }
 }

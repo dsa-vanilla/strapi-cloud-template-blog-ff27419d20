@@ -4,7 +4,8 @@
   "info": {
     "singularName": "video",
     "pluralName": "videos",
-    "displayName": "Videos"
+    "displayName": "Videos",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -38,6 +39,22 @@
     },
     "teaser_text": {
       "type": "text"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::season.season"
+    },
+    "episodes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::episode.episode",
+      "mappedBy": "video"
+    },
+    "format": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::format.format"
     }
   }
 }

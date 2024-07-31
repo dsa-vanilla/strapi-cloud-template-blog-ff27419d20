@@ -47,6 +47,12 @@
       "type": "string",
       "required": false,
       "unique": true
+    },
+    "format": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::format.format",
+      "inversedBy": "clips"
     }
   }
 }

@@ -871,6 +871,11 @@ export interface ApiClipClip extends Schema.CollectionType {
     title: Attribute.String;
     teaser_text: Attribute.Text;
     unique_id: Attribute.String & Attribute.Unique;
+    format: Attribute.Relation<
+      'api::clip.clip',
+      'manyToOne',
+      'api::format.format'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -910,6 +915,11 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
       'api::episode.episode',
       'manyToOne',
       'api::season.season'
+    >;
+    video: Attribute.Relation<
+      'api::episode.episode',
+      'manyToOne',
+      'api::video.video'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -969,6 +979,11 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     short_description: Attribute.Text;
     medium_description: Attribute.String;
     format_id: Attribute.Integer;
+    clips: Attribute.Relation<
+      'api::format.format',
+      'oneToMany',
+      'api::clip.clip'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1303,6 +1318,7 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     singularName: 'video';
     pluralName: 'videos';
     displayName: 'Videos';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1317,6 +1333,21 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     teaser_image_thumb: Attribute.String;
     title: Attribute.Text;
     teaser_text: Attribute.Text;
+    season: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'api::season.season'
+    >;
+    episodes: Attribute.Relation<
+      'api::video.video',
+      'oneToMany',
+      'api::episode.episode'
+    >;
+    format: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'api::format.format'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
