@@ -4,7 +4,8 @@
   "info": {
     "singularName": "season",
     "pluralName": "seasons",
-    "displayName": "Season"
+    "displayName": "Season",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,6 +31,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::programs.programs",
+      "mappedBy": "season"
+    },
+    "episodes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::episode.episode",
       "mappedBy": "season"
     }
   }

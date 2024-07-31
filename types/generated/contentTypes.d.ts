@@ -866,6 +866,11 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
     teaser_text: Attribute.String;
     episode_id: Attribute.Integer;
     season_id: Attribute.Integer;
+    season: Attribute.Relation<
+      'api::episode.episode',
+      'manyToOne',
+      'api::season.season'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1213,6 +1218,7 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
     singularName: 'season';
     pluralName: 'seasons';
     displayName: 'Season';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1227,6 +1233,11 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
       'api::season.season',
       'oneToMany',
       'api::programs.programs'
+    >;
+    episodes: Attribute.Relation<
+      'api::season.season',
+      'oneToMany',
+      'api::episode.episode'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

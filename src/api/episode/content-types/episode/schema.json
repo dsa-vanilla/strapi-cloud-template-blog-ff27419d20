@@ -50,6 +50,12 @@
     },
     "season_id": {
       "type": "integer"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::season.season",
+      "inversedBy": "episodes"
     }
   }
 }
