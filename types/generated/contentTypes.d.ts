@@ -863,6 +863,40 @@ export interface ApiFaqFaq extends Schema.SingleType {
   };
 }
 
+export interface ApiFormatFormat extends Schema.CollectionType {
+  collectionName: 'formats';
+  info: {
+    singularName: 'format';
+    pluralName: 'formats';
+    displayName: 'Format';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    type: Attribute.Enumeration<['tvshow', 'webshow']>;
+    description: Attribute.Text;
+    short_description: Attribute.Text;
+    medium_description: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::format.format',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::format.format',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGenresGenres extends Schema.CollectionType {
   collectionName: 'genre';
   info: {
@@ -1054,14 +1088,13 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks;
     year: Attribute.Integer;
     availability: Attribute.Boolean;
     processed: Attribute.Boolean;
     duration: Attribute.BigInteger;
     name: Attribute.String;
     enumeration: Attribute.Enumeration<
-      ['season', 'episode', 'movie', 'clip', 'series', 'format']
+      ['season', 'episode', 'movie', 'clip', 'series']
     >;
     episodeNumber: Attribute.Integer;
     seasonNumber: Attribute.Integer;
@@ -1095,6 +1128,7 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
       'api::pg-ratings.pg-ratings'
     >;
     asset: Attribute.Media;
+    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1170,6 +1204,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::categories.categories': ApiCategoriesCategories;
       'api::faq.faq': ApiFaqFaq;
+      'api::format.format': ApiFormatFormat;
       'api::genres.genres': ApiGenresGenres;
       'api::legal-info.legal-info': ApiLegalInfoLegalInfo;
       'api::pages.pages': ApiPagesPages;

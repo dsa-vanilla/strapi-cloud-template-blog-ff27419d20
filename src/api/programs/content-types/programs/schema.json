@@ -16,9 +16,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "blocks"
-    },
     "year": {
       "type": "integer"
     },
@@ -41,8 +38,7 @@
         "episode",
         "movie",
         "clip",
-        "series",
-        "format"
+        "series"
       ]
     },
     "episodeNumber": {
@@ -121,6 +117,9 @@
         "videos",
         "audios"
       ]
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
