@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clips",
+  "info": {
+    "singularName": "clip",
+    "pluralName": "clips",
+    "displayName": "Clips"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "episode": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::episode.episode"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::season.season"
+    },
+    "original_image": {
+      "type": "string"
+    },
+    "teaser_image_big": {
+      "type": "string"
+    },
+    "teaser_image_standard": {
+      "type": "string"
+    },
+    "teaser_image_small": {
+      "type": "string"
+    },
+    "teaser_image_thumb": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "teaser_text": {
+      "type": "text"
+    }
+  }
+}

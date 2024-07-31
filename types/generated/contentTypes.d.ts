@@ -841,6 +841,44 @@ export interface ApiCategoriesCategories extends Schema.CollectionType {
   };
 }
 
+export interface ApiClipClip extends Schema.CollectionType {
+  collectionName: 'clips';
+  info: {
+    singularName: 'clip';
+    pluralName: 'clips';
+    displayName: 'Clips';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    episode: Attribute.Relation<
+      'api::clip.clip',
+      'oneToOne',
+      'api::episode.episode'
+    >;
+    season: Attribute.Relation<
+      'api::clip.clip',
+      'oneToOne',
+      'api::season.season'
+    >;
+    original_image: Attribute.String;
+    teaser_image_big: Attribute.String;
+    teaser_image_standard: Attribute.String;
+    teaser_image_small: Attribute.String;
+    teaser_image_thumb: Attribute.String;
+    title: Attribute.String;
+    teaser_text: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::clip.clip', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::clip.clip', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEpisodeEpisode extends Schema.CollectionType {
   collectionName: 'episodes';
   info: {
@@ -1313,6 +1351,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::categories.categories': ApiCategoriesCategories;
+      'api::clip.clip': ApiClipClip;
       'api::episode.episode': ApiEpisodeEpisode;
       'api::faq.faq': ApiFaqFaq;
       'api::format.format': ApiFormatFormat;
