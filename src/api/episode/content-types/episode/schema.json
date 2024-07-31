@@ -4,7 +4,8 @@
   "info": {
     "singularName": "episode",
     "pluralName": "episodes",
-    "displayName": "Episode"
+    "displayName": "Episode",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -43,6 +44,12 @@
     },
     "teaser_text": {
       "type": "string"
+    },
+    "episode_id": {
+      "type": "integer"
+    },
+    "season_id": {
+      "type": "integer"
     }
   }
 }

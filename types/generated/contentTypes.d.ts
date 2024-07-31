@@ -847,6 +847,7 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
     singularName: 'episode';
     pluralName: 'episodes';
     displayName: 'Episode';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -863,6 +864,8 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
     teaser_image_small: Attribute.String;
     teaser_image_thumb: Attribute.String;
     teaser_text: Attribute.String;
+    episode_id: Attribute.Integer;
+    season_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -909,6 +912,7 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     singularName: 'format';
     pluralName: 'formats';
     displayName: 'Format';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -919,6 +923,7 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     description: Attribute.Text;
     short_description: Attribute.Text;
     medium_description: Attribute.String;
+    format_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1169,6 +1174,21 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
     >;
     asset: Attribute.Media;
     description: Attribute.Text;
+    season: Attribute.Relation<
+      'api::programs.programs',
+      'manyToOne',
+      'api::season.season'
+    >;
+    format: Attribute.Relation<
+      'api::programs.programs',
+      'oneToOne',
+      'api::format.format'
+    >;
+    episode: Attribute.Relation<
+      'api::programs.programs',
+      'oneToOne',
+      'api::episode.episode'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1203,6 +1223,11 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
     long_description: Attribute.Text;
     medium_description: Attribute.Text;
     short_description: Attribute.Text;
+    programs: Attribute.Relation<
+      'api::season.season',
+      'oneToMany',
+      'api::programs.programs'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

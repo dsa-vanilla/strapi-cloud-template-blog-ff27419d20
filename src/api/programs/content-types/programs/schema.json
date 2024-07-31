@@ -120,6 +120,22 @@
     },
     "description": {
       "type": "text"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::season.season",
+      "inversedBy": "programs"
+    },
+    "format": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::format.format"
+    },
+    "episode": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::episode.episode"
     }
   }
 }

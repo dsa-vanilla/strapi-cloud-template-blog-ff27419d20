@@ -4,7 +4,8 @@
   "info": {
     "singularName": "format",
     "pluralName": "formats",
-    "displayName": "Format"
+    "displayName": "Format",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,6 +30,9 @@
     },
     "medium_description": {
       "type": "string"
+    },
+    "format_id": {
+      "type": "integer"
     }
   }
 }
