@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seasons",
+  "info": {
+    "singularName": "season",
+    "pluralName": "seasons",
+    "displayName": "Season"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "long_description": {
+      "type": "text"
+    },
+    "medium_description": {
+      "type": "text"
+    },
+    "short_description": {
+      "type": "text"
+    }
+  }
+}

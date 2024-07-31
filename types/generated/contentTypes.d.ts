@@ -841,6 +841,46 @@ export interface ApiCategoriesCategories extends Schema.CollectionType {
   };
 }
 
+export interface ApiEpisodeEpisode extends Schema.CollectionType {
+  collectionName: 'episodes';
+  info: {
+    singularName: 'episode';
+    pluralName: 'episodes';
+    displayName: 'Episode';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    number: Attribute.Integer;
+    title: Attribute.String;
+    description: Attribute.Text;
+    subtitle: Attribute.String;
+    imdb: Attribute.String;
+    orginal_image: Attribute.String;
+    teaser_image_big: Attribute.String;
+    teaser_image_standard: Attribute.String;
+    teaser_image_small: Attribute.String;
+    teaser_image_thumb: Attribute.String;
+    teaser_text: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::episode.episode',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::episode.episode',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFaqFaq extends Schema.SingleType {
   collectionName: 'faqs';
   info: {
@@ -1147,6 +1187,40 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
   };
 }
 
+export interface ApiSeasonSeason extends Schema.CollectionType {
+  collectionName: 'seasons';
+  info: {
+    singularName: 'season';
+    pluralName: 'seasons';
+    displayName: 'Season';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    number: Attribute.Integer;
+    long_description: Attribute.Text;
+    medium_description: Attribute.Text;
+    short_description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::season.season',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::season.season',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiWatchHistoriesWatchHistories extends Schema.CollectionType {
   collectionName: 'watch_history';
   info: {
@@ -1203,6 +1277,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::categories.categories': ApiCategoriesCategories;
+      'api::episode.episode': ApiEpisodeEpisode;
       'api::faq.faq': ApiFaqFaq;
       'api::format.format': ApiFormatFormat;
       'api::genres.genres': ApiGenresGenres;
@@ -1211,6 +1286,7 @@ declare module '@strapi/types' {
       'api::persons.persons': ApiPersonsPersons;
       'api::pg-ratings.pg-ratings': ApiPgRatingsPgRatings;
       'api::programs.programs': ApiProgramsPrograms;
+      'api::season.season': ApiSeasonSeason;
       'api::watch-histories.watch-histories': ApiWatchHistoriesWatchHistories;
     }
   }
