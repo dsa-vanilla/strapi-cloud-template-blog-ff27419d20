@@ -40,10 +40,9 @@
         "season",
         "episode",
         "movie",
+        "clip",
         "series",
-        "seasonMovies",
-        "seriesMovies",
-        "unknown"
+        "format"
       ]
     },
     "episodeNumber": {
@@ -113,14 +112,15 @@
       "mappedBy": "program"
     },
     "asset": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

@@ -1061,15 +1061,7 @@ export interface ApiProgramsPrograms extends Schema.CollectionType {
     duration: Attribute.BigInteger;
     name: Attribute.String;
     enumeration: Attribute.Enumeration<
-      [
-        'season',
-        'episode',
-        'movie',
-        'series',
-        'seasonMovies',
-        'seriesMovies',
-        'unknown'
-      ]
+      ['season', 'episode', 'movie', 'clip', 'series', 'format']
     >;
     episodeNumber: Attribute.Integer;
     seasonNumber: Attribute.Integer;
