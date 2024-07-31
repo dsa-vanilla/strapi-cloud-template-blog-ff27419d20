@@ -1,26 +1,22 @@
 {
   "kind": "collectionType",
-  "collectionName": "clips",
+  "collectionName": "videos",
   "info": {
-    "singularName": "clip",
-    "pluralName": "clips",
-    "displayName": "Clips",
-    "description": ""
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "Videos"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "episode": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::episode.episode"
+    "unique_id": {
+      "type": "string",
+      "unique": true
     },
-    "season": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::season.season"
+    "file_path": {
+      "type": "string"
     },
     "original_image": {
       "type": "string"
@@ -38,15 +34,10 @@
       "type": "string"
     },
     "title": {
-      "type": "string"
+      "type": "text"
     },
     "teaser_text": {
       "type": "text"
-    },
-    "unique_id": {
-      "type": "string",
-      "required": false,
-      "unique": true
     }
   }
 }

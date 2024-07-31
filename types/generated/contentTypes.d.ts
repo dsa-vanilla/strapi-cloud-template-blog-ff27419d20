@@ -847,6 +847,7 @@ export interface ApiClipClip extends Schema.CollectionType {
     singularName: 'clip';
     pluralName: 'clips';
     displayName: 'Clips';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -869,6 +870,7 @@ export interface ApiClipClip extends Schema.CollectionType {
     teaser_image_thumb: Attribute.String;
     title: Attribute.String;
     teaser_text: Attribute.Text;
+    unique_id: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1295,6 +1297,44 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
   };
 }
 
+export interface ApiVideoVideo extends Schema.CollectionType {
+  collectionName: 'videos';
+  info: {
+    singularName: 'video';
+    pluralName: 'videos';
+    displayName: 'Videos';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    unique_id: Attribute.String & Attribute.Unique;
+    file_path: Attribute.String;
+    original_image: Attribute.String;
+    teaser_image_big: Attribute.String;
+    teaser_image_standard: Attribute.String;
+    teaser_image_small: Attribute.String;
+    teaser_image_thumb: Attribute.String;
+    title: Attribute.Text;
+    teaser_text: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiWatchHistoriesWatchHistories extends Schema.CollectionType {
   collectionName: 'watch_history';
   info: {
@@ -1362,6 +1402,7 @@ declare module '@strapi/types' {
       'api::pg-ratings.pg-ratings': ApiPgRatingsPgRatings;
       'api::programs.programs': ApiProgramsPrograms;
       'api::season.season': ApiSeasonSeason;
+      'api::video.video': ApiVideoVideo;
       'api::watch-histories.watch-histories': ApiWatchHistoriesWatchHistories;
     }
   }
