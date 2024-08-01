@@ -4,7 +4,7 @@
   "info": {
     "singularName": "video",
     "pluralName": "videos",
-    "displayName": "Videos",
+    "displayName": "Video",
     "description": ""
   },
   "options": {
@@ -12,11 +12,32 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "unique_id": {
-      "type": "string",
-      "unique": true
+    "doc_id": {
+      "type": "string"
     },
-    "file_path": {
+    "unique_id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "clip",
+        "full_length"
+      ]
+    },
+    "node_id": {
+      "type": "string"
+    },
+    "file_constant_part": {
+      "type": "string"
+    },
+    "path_constant_part": {
+      "type": "string"
+    },
+    "broadcast_date": {
+      "type": "string"
+    },
+    "create_date": {
       "type": "string"
     },
     "original_image": {
@@ -34,21 +55,80 @@
     "teaser_image_thumb": {
       "type": "string"
     },
+    "featured": {
+      "type": "boolean"
+    },
+    "media_type": {
+      "type": "enumeration",
+      "enum": [
+        "mp4"
+      ]
+    },
     "title": {
-      "type": "text"
+      "type": "string"
     },
     "teaser_text": {
       "type": "text"
     },
+    "keywords": {
+      "type": "text"
+    },
+    "special_number": {
+      "type": "string"
+    },
+    "segment_number": {
+      "type": "string"
+    },
+    "time_start": {
+      "type": "string"
+    },
+    "time_end": {
+      "type": "string"
+    },
+    "cuepoints": {
+      "type": "string"
+    },
+    "sponsoring": {
+      "type": "boolean"
+    },
+    "frame_rate": {
+      "type": "string"
+    },
+    "play_length": {
+      "type": "string"
+    },
+    "aspect_ratio": {
+      "type": "string"
+    },
+    "video_width": {
+      "type": "string"
+    },
+    "video_height": {
+      "type": "string"
+    },
+    "frame_format": {
+      "type": "string"
+    },
+    "broadcast_time": {
+      "type": "string"
+    },
+    "episode": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::episode.episode",
+      "inversedBy": "videos"
+    },
     "season": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::season.season"
+      "relation": "manyToOne",
+      "target": "api::season.season",
+      "inversedBy": "videos"
     },
     "format": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::format.format"
+      "relation": "manyToOne",
+      "target": "api::format.format",
+      "inversedBy": "videos"
     }
   }
 }

@@ -4,8 +4,7 @@
   "info": {
     "singularName": "episode",
     "pluralName": "episodes",
-    "displayName": "Episode",
-    "description": ""
+    "displayName": "Episode"
   },
   "options": {
     "draftAndPublish": true
@@ -22,34 +21,16 @@
       "type": "text"
     },
     "subtitle": {
-      "type": "string"
+      "type": "text"
     },
     "imdb": {
       "type": "string"
     },
-    "orginal_image": {
-      "type": "string"
-    },
-    "teaser_image_big": {
-      "type": "string"
-    },
-    "teaser_image_standard": {
-      "type": "string"
-    },
-    "teaser_image_small": {
-      "type": "string"
-    },
-    "teaser_image_thumb": {
-      "type": "string"
-    },
-    "teaser_text": {
-      "type": "string"
-    },
-    "episode_id": {
-      "type": "integer"
-    },
-    "season_id": {
-      "type": "integer"
+    "videos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::video.video",
+      "mappedBy": "episode"
     }
   }
 }

@@ -788,111 +788,12 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoriesCategories extends Schema.CollectionType {
-  collectionName: 'category';
-  info: {
-    singularName: 'categories';
-    pluralName: 'category';
-    displayName: 'Categories';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Blocks;
-    name: Attribute.String;
-    ssoTitle: Attribute.String;
-    templateType: Attribute.Enumeration<
-      [
-        'hero',
-        'editorial',
-        'promo',
-        'latest',
-        'genre',
-        'query',
-        'resumeWatching'
-      ]
-    >;
-    packshotType: Attribute.Enumeration<['landscape', 'portrait']> &
-      Attribute.DefaultTo<'landscape'>;
-    page: Attribute.Relation<
-      'api::categories.categories',
-      'oneToOne',
-      'api::pages.pages'
-    >;
-    asset: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::categories.categories',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::categories.categories',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiClipClip extends Schema.CollectionType {
-  collectionName: 'clips';
-  info: {
-    singularName: 'clip';
-    pluralName: 'clips';
-    displayName: 'Clips';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    episode: Attribute.Relation<
-      'api::clip.clip',
-      'oneToOne',
-      'api::episode.episode'
-    >;
-    season: Attribute.Relation<
-      'api::clip.clip',
-      'oneToOne',
-      'api::season.season'
-    >;
-    original_image: Attribute.String;
-    teaser_image_big: Attribute.String;
-    teaser_image_standard: Attribute.String;
-    teaser_image_small: Attribute.String;
-    teaser_image_thumb: Attribute.String;
-    title: Attribute.String;
-    teaser_text: Attribute.Text;
-    unique_id: Attribute.String & Attribute.Unique;
-    format: Attribute.Relation<
-      'api::clip.clip',
-      'manyToOne',
-      'api::format.format'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::clip.clip', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::clip.clip', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiEpisodeEpisode extends Schema.CollectionType {
   collectionName: 'episodes';
   info: {
     singularName: 'episode';
     pluralName: 'episodes';
     displayName: 'Episode';
-    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -901,16 +802,13 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
     number: Attribute.Integer;
     title: Attribute.String;
     description: Attribute.Text;
-    subtitle: Attribute.String;
+    subtitle: Attribute.Text;
     imdb: Attribute.String;
-    orginal_image: Attribute.String;
-    teaser_image_big: Attribute.String;
-    teaser_image_standard: Attribute.String;
-    teaser_image_small: Attribute.String;
-    teaser_image_thumb: Attribute.String;
-    teaser_text: Attribute.String;
-    episode_id: Attribute.Integer;
-    season_id: Attribute.Integer;
+    videos: Attribute.Relation<
+      'api::episode.episode',
+      'oneToMany',
+      'api::video.video'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -957,22 +855,26 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     singularName: 'format';
     pluralName: 'formats';
     displayName: 'Format';
-    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
+    normalized: Attribute.String;
     type: Attribute.Enumeration<['tvshow', 'webshow']>;
-    description: Attribute.Text;
+    long_description: Attribute.Text;
+    medium_description: Attribute.Text;
     short_description: Attribute.Text;
-    medium_description: Attribute.String;
-    format_id: Attribute.Integer;
-    clips: Attribute.Relation<
+    position: Attribute.Integer;
+    number_of_seasons: Attribute.Integer;
+    number_of_fullepisodes: Attribute.Integer;
+    number_of_clips: Attribute.Integer;
+    imdb: Attribute.String;
+    videos: Attribute.Relation<
       'api::format.format',
       'oneToMany',
-      'api::clip.clip'
+      'api::video.video'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -985,42 +887,6 @@ export interface ApiFormatFormat extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::format.format',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGenresGenres extends Schema.CollectionType {
-  collectionName: 'genre';
-  info: {
-    singularName: 'genres';
-    pluralName: 'genre';
-    displayName: 'Genres';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    seoTitle: Attribute.String;
-    program: Attribute.Relation<
-      'api::genres.genres',
-      'manyToOne',
-      'api::programs.programs'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::genres.genres',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::genres.genres',
       'oneToOne',
       'admin::user'
     > &
@@ -1060,210 +926,12 @@ export interface ApiLegalInfoLegalInfo extends Schema.SingleType {
   };
 }
 
-export interface ApiPagesPages extends Schema.CollectionType {
-  collectionName: 'page';
-  info: {
-    singularName: 'pages';
-    pluralName: 'page';
-    displayName: 'Pages';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    key: Attribute.UID;
-    title: Attribute.String;
-    category: Attribute.Relation<
-      'api::pages.pages',
-      'oneToOne',
-      'api::categories.categories'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::pages.pages',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::pages.pages',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPersonsPersons extends Schema.CollectionType {
-  collectionName: 'person';
-  info: {
-    singularName: 'persons';
-    pluralName: 'person';
-    displayName: 'Persons';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
-    asset: Attribute.Media;
-    program: Attribute.Relation<
-      'api::persons.persons',
-      'manyToOne',
-      'api::programs.programs'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::persons.persons',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::persons.persons',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPgRatingsPgRatings extends Schema.CollectionType {
-  collectionName: 'pg_rating';
-  info: {
-    singularName: 'pg-ratings';
-    pluralName: 'pg-rating';
-    displayName: 'PG Ratings';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    rating: Attribute.String & Attribute.Required;
-    title: Attribute.String;
-    schema: Attribute.String;
-    program: Attribute.Relation<
-      'api::pg-ratings.pg-ratings',
-      'manyToOne',
-      'api::programs.programs'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::pg-ratings.pg-ratings',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::pg-ratings.pg-ratings',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProgramsPrograms extends Schema.CollectionType {
-  collectionName: 'program';
-  info: {
-    singularName: 'programs';
-    pluralName: 'program';
-    displayName: 'Programs';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    year: Attribute.Integer;
-    availability: Attribute.Boolean;
-    processed: Attribute.Boolean;
-    duration: Attribute.BigInteger;
-    name: Attribute.String;
-    enumeration: Attribute.Enumeration<
-      ['season', 'episode', 'movie', 'clip', 'series']
-    >;
-    episodeNumber: Attribute.Integer;
-    seasonNumber: Attribute.Integer;
-    studioAssetID: Attribute.String;
-    seoTitle: Attribute.String;
-    parentStudioAssetID: Attribute.String;
-    contentPartner: Attribute.String;
-    studio: Attribute.String;
-    mediaInfoOutput: Attribute.JSON;
-    genreText: Attribute.String;
-    imdbID: Attribute.String;
-    childrenOrderedIDs: Attribute.JSON;
-    parentPublishStatus: Attribute.JSON;
-    enforceHls: Attribute.Boolean;
-    streamQuality: Attribute.Enumeration<
-      ['SD_420p', 'HD_720p', 'FHD_1080p', 'UHD_2160p']
-    >;
-    people: Attribute.Relation<
-      'api::programs.programs',
-      'oneToMany',
-      'api::persons.persons'
-    >;
-    genres: Attribute.Relation<
-      'api::programs.programs',
-      'oneToMany',
-      'api::genres.genres'
-    >;
-    pg_ratings: Attribute.Relation<
-      'api::programs.programs',
-      'oneToMany',
-      'api::pg-ratings.pg-ratings'
-    >;
-    asset: Attribute.Media;
-    description: Attribute.Text;
-    season: Attribute.Relation<
-      'api::programs.programs',
-      'manyToOne',
-      'api::season.season'
-    >;
-    format: Attribute.Relation<
-      'api::programs.programs',
-      'oneToOne',
-      'api::format.format'
-    >;
-    episode: Attribute.Relation<
-      'api::programs.programs',
-      'oneToOne',
-      'api::episode.episode'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::programs.programs',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::programs.programs',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiSeasonSeason extends Schema.CollectionType {
   collectionName: 'seasons';
   info: {
     singularName: 'season';
     pluralName: 'seasons';
     displayName: 'Season';
-    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1274,10 +942,13 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
     long_description: Attribute.Text;
     medium_description: Attribute.Text;
     short_description: Attribute.Text;
-    programs: Attribute.Relation<
+    number_of_fullepisodes: Attribute.Integer;
+    number_of_clips: Attribute.Integer;
+    imdb: Attribute.String;
+    videos: Attribute.Relation<
       'api::season.season',
       'oneToMany',
-      'api::programs.programs'
+      'api::video.video'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1302,30 +973,57 @@ export interface ApiVideoVideo extends Schema.CollectionType {
   info: {
     singularName: 'video';
     pluralName: 'videos';
-    displayName: 'Videos';
+    displayName: 'Video';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    unique_id: Attribute.String & Attribute.Unique;
-    file_path: Attribute.String;
+    doc_id: Attribute.String;
+    unique_id: Attribute.String;
+    type: Attribute.Enumeration<['clip', 'full_length']>;
+    node_id: Attribute.String;
+    file_constant_part: Attribute.String;
+    path_constant_part: Attribute.String;
+    broadcast_date: Attribute.String;
+    create_date: Attribute.String;
     original_image: Attribute.String;
     teaser_image_big: Attribute.String;
     teaser_image_standard: Attribute.String;
     teaser_image_small: Attribute.String;
     teaser_image_thumb: Attribute.String;
-    title: Attribute.Text;
+    featured: Attribute.Boolean;
+    media_type: Attribute.Enumeration<['mp4']>;
+    title: Attribute.String;
     teaser_text: Attribute.Text;
+    keywords: Attribute.Text;
+    special_number: Attribute.String;
+    segment_number: Attribute.String;
+    time_start: Attribute.String;
+    time_end: Attribute.String;
+    cuepoints: Attribute.String;
+    sponsoring: Attribute.Boolean;
+    frame_rate: Attribute.String;
+    play_length: Attribute.String;
+    aspect_ratio: Attribute.String;
+    video_width: Attribute.String;
+    video_height: Attribute.String;
+    frame_format: Attribute.String;
+    broadcast_time: Attribute.String;
+    episode: Attribute.Relation<
+      'api::video.video',
+      'manyToOne',
+      'api::episode.episode'
+    >;
     season: Attribute.Relation<
       'api::video.video',
-      'oneToOne',
+      'manyToOne',
       'api::season.season'
     >;
     format: Attribute.Relation<
       'api::video.video',
-      'oneToOne',
+      'manyToOne',
       'api::format.format'
     >;
     createdAt: Attribute.DateTime;
@@ -1339,43 +1037,6 @@ export interface ApiVideoVideo extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::video.video',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWatchHistoriesWatchHistories extends Schema.CollectionType {
-  collectionName: 'watch_history';
-  info: {
-    singularName: 'watch-histories';
-    pluralName: 'watch-history';
-    displayName: 'Watch histories';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    userID: Attribute.String;
-    studioAssetID: Attribute.String;
-    progressPercent: Attribute.Float;
-    progressSeconds: Attribute.Integer;
-    programID: Attribute.Integer;
-    seasonNumber: Attribute.Integer;
-    episodeNumber: Attribute.Integer;
-    episodeTitle: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::watch-histories.watch-histories',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::watch-histories.watch-histories',
       'oneToOne',
       'admin::user'
     > &
@@ -1401,20 +1062,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::categories.categories': ApiCategoriesCategories;
-      'api::clip.clip': ApiClipClip;
       'api::episode.episode': ApiEpisodeEpisode;
       'api::faq.faq': ApiFaqFaq;
       'api::format.format': ApiFormatFormat;
-      'api::genres.genres': ApiGenresGenres;
       'api::legal-info.legal-info': ApiLegalInfoLegalInfo;
-      'api::pages.pages': ApiPagesPages;
-      'api::persons.persons': ApiPersonsPersons;
-      'api::pg-ratings.pg-ratings': ApiPgRatingsPgRatings;
-      'api::programs.programs': ApiProgramsPrograms;
       'api::season.season': ApiSeasonSeason;
       'api::video.video': ApiVideoVideo;
-      'api::watch-histories.watch-histories': ApiWatchHistoriesWatchHistories;
     }
   }
 }
