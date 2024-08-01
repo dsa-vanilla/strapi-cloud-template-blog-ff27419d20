@@ -4,7 +4,8 @@
   "info": {
     "singularName": "format",
     "pluralName": "formats",
-    "displayName": "Format"
+    "displayName": "Format",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -33,9 +34,6 @@
     "short_description": {
       "type": "text"
     },
-    "position": {
-      "type": "integer"
-    },
     "number_of_seasons": {
       "type": "integer"
     },
@@ -53,6 +51,12 @@
       "relation": "oneToMany",
       "target": "api::video.video",
       "mappedBy": "format"
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "top"
+      ]
     }
   }
 }

@@ -855,6 +855,7 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     singularName: 'format';
     pluralName: 'formats';
     displayName: 'Format';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -866,7 +867,6 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     long_description: Attribute.Text;
     medium_description: Attribute.Text;
     short_description: Attribute.Text;
-    position: Attribute.Integer;
     number_of_seasons: Attribute.Integer;
     number_of_fullepisodes: Attribute.Integer;
     number_of_clips: Attribute.Integer;
@@ -876,6 +876,7 @@ export interface ApiFormatFormat extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
+    position: Attribute.Enumeration<['top']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
