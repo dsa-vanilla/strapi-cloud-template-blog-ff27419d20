@@ -911,16 +911,6 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
     teaser_text: Attribute.String;
     episode_id: Attribute.Integer;
     season_id: Attribute.Integer;
-    season: Attribute.Relation<
-      'api::episode.episode',
-      'manyToOne',
-      'api::season.season'
-    >;
-    video: Attribute.Relation<
-      'api::episode.episode',
-      'manyToOne',
-      'api::video.video'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1289,11 +1279,6 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
       'oneToMany',
       'api::programs.programs'
     >;
-    episodes: Attribute.Relation<
-      'api::season.season',
-      'oneToMany',
-      'api::episode.episode'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1337,11 +1322,6 @@ export interface ApiVideoVideo extends Schema.CollectionType {
       'api::video.video',
       'oneToOne',
       'api::season.season'
-    >;
-    episodes: Attribute.Relation<
-      'api::video.video',
-      'oneToMany',
-      'api::episode.episode'
     >;
     format: Attribute.Relation<
       'api::video.video',

@@ -50,18 +50,6 @@
     },
     "season_id": {
       "type": "integer"
-    },
-    "season": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::season.season",
-      "inversedBy": "episodes"
-    },
-    "video": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::video.video",
-      "inversedBy": "episodes"
     }
   }
 }
