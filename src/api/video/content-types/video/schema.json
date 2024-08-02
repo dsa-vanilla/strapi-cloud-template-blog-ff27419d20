@@ -74,10 +74,10 @@
       "type": "text"
     },
     "special_number": {
-      "type": "biginteger"
+      "type": "string"
     },
     "segment_number": {
-      "type": "biginteger"
+      "type": "string"
     },
     "time_start": {
       "type": "string"
