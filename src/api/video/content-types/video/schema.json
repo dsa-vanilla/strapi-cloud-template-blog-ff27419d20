@@ -71,10 +71,10 @@
       "type": "text"
     },
     "special_number": {
-      "type": "string"
+      "type": "integer"
     },
     "segment_number": {
-      "type": "string"
+      "type": "integer"
     },
     "time_start": {
       "type": "string"
@@ -92,16 +92,16 @@
       "type": "string"
     },
     "play_length": {
-      "type": "string"
+      "type": "integer"
     },
     "aspect_ratio": {
       "type": "string"
     },
     "video_width": {
-      "type": "string"
+      "type": "integer"
     },
     "video_height": {
-      "type": "string"
+      "type": "integer"
     },
     "frame_format": {
       "type": "string"

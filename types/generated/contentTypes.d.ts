@@ -1003,17 +1003,17 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     title: Attribute.String;
     teaser_text: Attribute.Text;
     keywords: Attribute.Text;
-    special_number: Attribute.String;
-    segment_number: Attribute.String;
+    special_number: Attribute.Integer;
+    segment_number: Attribute.Integer;
     time_start: Attribute.String;
     time_end: Attribute.String;
     cuepoints: Attribute.String;
     sponsoring: Attribute.Boolean;
     frame_rate: Attribute.String;
-    play_length: Attribute.String;
+    play_length: Attribute.Integer;
     aspect_ratio: Attribute.String;
-    video_width: Attribute.String;
-    video_height: Attribute.String;
+    video_width: Attribute.Integer;
+    video_height: Attribute.Integer;
     frame_format: Attribute.String;
     broadcast_time: Attribute.String;
     episode: Attribute.Relation<
