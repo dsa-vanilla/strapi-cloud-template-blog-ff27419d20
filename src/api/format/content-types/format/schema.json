@@ -57,6 +57,9 @@
       "enum": [
         "top"
       ]
+    },
+    "legacy_id": {
+      "type": "string"
     }
   }
 }

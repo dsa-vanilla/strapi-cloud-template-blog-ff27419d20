@@ -129,6 +129,9 @@
       "relation": "manyToOne",
       "target": "api::format.format",
       "inversedBy": "videos"
+    },
+    "legacy_id": {
+      "type": "string"
     }
   }
 }

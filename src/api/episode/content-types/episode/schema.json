@@ -4,7 +4,8 @@
   "info": {
     "singularName": "episode",
     "pluralName": "episodes",
-    "displayName": "Episode"
+    "displayName": "Episode",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,6 +32,9 @@
       "relation": "oneToMany",
       "target": "api::video.video",
       "mappedBy": "episode"
+    },
+    "legacy_id": {
+      "type": "string"
     }
   }
 }
