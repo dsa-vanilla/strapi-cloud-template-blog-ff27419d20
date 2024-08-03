@@ -810,7 +810,7 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
-    legacy_id: Attribute.String;
+    legacy_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -878,8 +878,8 @@ export interface ApiFormatFormat extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
-    position: Attribute.Enumeration<['top']>;
-    legacy_id: Attribute.String;
+    legacy_id: Attribute.Integer;
+    position: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -955,7 +955,7 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
-    legacy_id: Attribute.String;
+    legacy_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -986,7 +986,6 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    doc_id: Attribute.String;
     unique_id: Attribute.String;
     type: Attribute.Enumeration<['clip', 'full_length']>;
     node_id: Attribute.String;
@@ -1033,6 +1032,7 @@ export interface ApiVideoVideo extends Schema.CollectionType {
       'api::format.format'
     >;
     legacy_id: Attribute.String;
+    doc_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -43,7 +43,7 @@
       "mappedBy": "season"
     },
     "legacy_id": {
-      "type": "string"
+      "type": "integer"
     }
   }
 }

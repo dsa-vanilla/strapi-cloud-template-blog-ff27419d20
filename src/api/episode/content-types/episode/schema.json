@@ -34,7 +34,7 @@
       "mappedBy": "episode"
     },
     "legacy_id": {
-      "type": "string"
+      "type": "integer"
     }
   }
 }

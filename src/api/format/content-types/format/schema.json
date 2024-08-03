@@ -52,14 +52,11 @@
       "target": "api::video.video",
       "mappedBy": "format"
     },
-    "position": {
-      "type": "enumeration",
-      "enum": [
-        "top"
-      ]
-    },
     "legacy_id": {
-      "type": "string"
+      "type": "integer"
+    },
+    "position": {
+      "type": "integer"
     }
   }
 }

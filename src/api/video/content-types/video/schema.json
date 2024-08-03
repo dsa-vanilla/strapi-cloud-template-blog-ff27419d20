@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "doc_id": {
-      "type": "string"
-    },
     "unique_id": {
       "type": "string"
     },
@@ -132,6 +129,9 @@
     },
     "legacy_id": {
       "type": "string"
+    },
+    "doc_id": {
+      "type": "integer"
     }
   }
 }
