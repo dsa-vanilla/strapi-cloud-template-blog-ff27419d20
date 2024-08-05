@@ -788,6 +788,42 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCarrouselCarrousel extends Schema.CollectionType {
+  collectionName: 'carrousels';
+  info: {
+    singularName: 'carrousel';
+    pluralName: 'carrousels';
+    displayName: 'Carrousel';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    videos: Attribute.Relation<
+      'api::carrousel.carrousel',
+      'oneToMany',
+      'api::video.video'
+    >;
+    position: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::carrousel.carrousel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::carrousel.carrousel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEpisodeEpisode extends Schema.CollectionType {
   collectionName: 'episodes';
   info: {
@@ -1033,6 +1069,11 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     >;
     legacy_id: Attribute.String;
     doc_id: Attribute.Integer;
+    carrousel: Attribute.Relation<
+      'api::video.video',
+      'manyToOne',
+      'api::carrousel.carrousel'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1069,6 +1110,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::carrousel.carrousel': ApiCarrouselCarrousel;
       'api::episode.episode': ApiEpisodeEpisode;
       'api::faq.faq': ApiFaqFaq;
       'api::format.format': ApiFormatFormat;
