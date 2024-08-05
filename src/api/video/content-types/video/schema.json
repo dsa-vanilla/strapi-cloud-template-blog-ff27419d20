@@ -132,12 +132,6 @@
     },
     "doc_id": {
       "type": "integer"
-    },
-    "carrousel": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::carrousel.carrousel",
-      "inversedBy": "videos"
     }
   }
 }
