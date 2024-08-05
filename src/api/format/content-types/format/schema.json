@@ -57,6 +57,12 @@
     },
     "position": {
       "type": "integer"
+    },
+    "seasons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::season.season",
+      "mappedBy": "format"
     }
   }
 }

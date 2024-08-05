@@ -35,6 +35,17 @@
     },
     "legacy_id": {
       "type": "integer"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::season.season",
+      "inversedBy": "episodes"
+    },
+    "format": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::format.format"
     }
   }
 }

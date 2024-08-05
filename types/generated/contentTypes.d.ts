@@ -848,6 +848,16 @@ export interface ApiEpisodeEpisode extends Schema.CollectionType {
       'api::video.video'
     >;
     legacy_id: Attribute.Integer;
+    season: Attribute.Relation<
+      'api::episode.episode',
+      'manyToOne',
+      'api::season.season'
+    >;
+    format: Attribute.Relation<
+      'api::episode.episode',
+      'oneToOne',
+      'api::format.format'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -917,6 +927,11 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     >;
     legacy_id: Attribute.Integer;
     position: Attribute.Integer;
+    seasons: Attribute.Relation<
+      'api::format.format',
+      'oneToMany',
+      'api::season.season'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -993,6 +1008,16 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
       'api::video.video'
     >;
     legacy_id: Attribute.Integer;
+    episodes: Attribute.Relation<
+      'api::season.season',
+      'oneToMany',
+      'api::episode.episode'
+    >;
+    format: Attribute.Relation<
+      'api::season.season',
+      'manyToOne',
+      'api::format.format'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
