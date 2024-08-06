@@ -807,6 +807,16 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
+    format: Attribute.Relation<
+      'api::carousel.carousel',
+      'oneToOne',
+      'api::format.format'
+    >;
+    season: Attribute.Relation<
+      'api::carousel.carousel',
+      'oneToOne',
+      'api::season.season'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -23,6 +23,16 @@
       "relation": "oneToMany",
       "target": "api::video.video",
       "mappedBy": "carousel"
+    },
+    "format": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::format.format"
+    },
+    "season": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::season.season"
     }
   }
 }
