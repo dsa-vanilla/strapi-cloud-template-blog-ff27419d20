@@ -121,12 +121,6 @@
       "target": "api::season.season",
       "inversedBy": "videos"
     },
-    "format": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::format.format",
-      "inversedBy": "videos"
-    },
     "legacy_id": {
       "type": "string"
     },
@@ -137,6 +131,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::carousel.carousel",
+      "inversedBy": "videos"
+    },
+    "format": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::format.format",
       "inversedBy": "videos"
     }
   }
