@@ -801,7 +801,9 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    position: Attribute.Integer;
+    position: Attribute.Enumeration<['vertical', 'horizontal']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'vertical'>;
     videos: Attribute.Relation<
       'api::carousel.carousel',
       'oneToMany',

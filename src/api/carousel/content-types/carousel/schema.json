@@ -16,7 +16,13 @@
       "type": "string"
     },
     "position": {
-      "type": "integer"
+      "type": "enumeration",
+      "enum": [
+        "vertical",
+        "horizontal"
+      ],
+      "default": "vertical",
+      "required": true
     },
     "videos": {
       "type": "relation",
