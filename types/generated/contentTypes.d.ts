@@ -809,17 +809,19 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
       'oneToMany',
       'api::video.video'
     >;
-    format: Attribute.Relation<
-      'api::carousel.carousel',
-      'oneToOne',
-      'api::format.format'
-    >;
-    season: Attribute.Relation<
-      'api::carousel.carousel',
-      'oneToOne',
-      'api::season.season'
-    >;
     image_position: Attribute.Enumeration<['vertical', 'horizontal']>;
+    page: Attribute.Enumeration<['homepage', 'detail page']>;
+    hero: Attribute.Boolean;
+    rule: Attribute.Enumeration<
+      [
+        'videos - top list',
+        'format - top list',
+        'genre - top list',
+        'videos - new',
+        'format - new',
+        'genre - new'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
