@@ -819,6 +819,7 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
       'oneToOne',
       'api::season.season'
     >;
+    image_position: Attribute.Enumeration<['vertical', 'horizontal']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

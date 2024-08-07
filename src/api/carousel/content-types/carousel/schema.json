@@ -39,6 +39,13 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::season.season"
+    },
+    "image_position": {
+      "type": "enumeration",
+      "enum": [
+        "vertical",
+        "horizontal"
+      ]
     }
   }
 }
