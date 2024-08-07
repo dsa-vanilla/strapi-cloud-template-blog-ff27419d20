@@ -30,21 +30,32 @@
       "target": "api::video.video",
       "mappedBy": "carousel"
     },
-    "format": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::format.format"
-    },
-    "season": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::season.season"
-    },
     "image_position": {
       "type": "enumeration",
       "enum": [
         "vertical",
         "horizontal"
+      ]
+    },
+    "page": {
+      "type": "enumeration",
+      "enum": [
+        "homepage",
+        "detail page"
+      ]
+    },
+    "hero": {
+      "type": "boolean"
+    },
+    "rule": {
+      "type": "enumeration",
+      "enum": [
+        "videos - top list",
+        "format - top list",
+        "genre - top list",
+        "videos - new",
+        "format - new",
+        "genre - new"
       ]
     }
   }
