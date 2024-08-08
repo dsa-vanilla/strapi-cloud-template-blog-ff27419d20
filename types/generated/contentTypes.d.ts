@@ -804,6 +804,11 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
     position: Attribute.Enumeration<['vertical', 'horizontal']> &
       Attribute.Required &
       Attribute.DefaultTo<'vertical'>;
+    videos: Attribute.Relation<
+      'api::carousel.carousel',
+      'oneToMany',
+      'api::video.video'
+    >;
     image_position: Attribute.Enumeration<['vertical', 'horizontal']>;
     page: Attribute.Enumeration<['homepage', 'detail page']>;
     hero: Attribute.Boolean;
@@ -930,17 +935,17 @@ export interface ApiFormatFormat extends Schema.CollectionType {
     number_of_fullepisodes: Attribute.Integer;
     number_of_clips: Attribute.Integer;
     imdb: Attribute.String;
-    videos: Attribute.Relation<
-      'api::format.format',
-      'oneToMany',
-      'api::video.video'
-    >;
     legacy_id: Attribute.Integer;
     position: Attribute.Integer;
     seasons: Attribute.Relation<
       'api::format.format',
       'oneToMany',
       'api::season.season'
+    >;
+    videos: Attribute.Relation<
+      'api::format.format',
+      'oneToMany',
+      'api::video.video'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1098,13 +1103,18 @@ export interface ApiVideoVideo extends Schema.CollectionType {
       'manyToOne',
       'api::season.season'
     >;
+    legacy_id: Attribute.String;
+    doc_id: Attribute.Integer;
+    carousel: Attribute.Relation<
+      'api::video.video',
+      'manyToOne',
+      'api::carousel.carousel'
+    >;
     format: Attribute.Relation<
       'api::video.video',
       'manyToOne',
       'api::format.format'
     >;
-    legacy_id: Attribute.String;
-    doc_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

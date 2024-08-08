@@ -4,6 +4,7 @@
     "@strapi/plugin-graphql": "^4.0.5",
     "@strapi/plugin-i18n": "4.21.1",
     "@strapi/plugin-users-permissions": "4.21.1",
+    "@strapi/provider-upload-aws-s3": "^4.25.6",
     "@strapi/strapi": "4.21.1",
     "better-sqlite3": "8.6.0",
     "fs-extra": "^10.0.0",
@@ -24,7 +25,6 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "author": {
     "name": "A Strapi developer"
   },
