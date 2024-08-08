@@ -24,12 +24,6 @@
       "default": "vertical",
       "required": true
     },
-    "videos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::video.video",
-      "mappedBy": "carousel"
-    },
     "image_position": {
       "type": "enumeration",
       "enum": [

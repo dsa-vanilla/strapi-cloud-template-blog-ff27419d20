@@ -804,11 +804,6 @@ export interface ApiCarouselCarousel extends Schema.CollectionType {
     position: Attribute.Enumeration<['vertical', 'horizontal']> &
       Attribute.Required &
       Attribute.DefaultTo<'vertical'>;
-    videos: Attribute.Relation<
-      'api::carousel.carousel',
-      'oneToMany',
-      'api::video.video'
-    >;
     image_position: Attribute.Enumeration<['vertical', 'horizontal']>;
     page: Attribute.Enumeration<['homepage', 'detail page']>;
     hero: Attribute.Boolean;
@@ -1110,11 +1105,6 @@ export interface ApiVideoVideo extends Schema.CollectionType {
     >;
     legacy_id: Attribute.String;
     doc_id: Attribute.Integer;
-    carousel: Attribute.Relation<
-      'api::video.video',
-      'manyToOne',
-      'api::carousel.carousel'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
