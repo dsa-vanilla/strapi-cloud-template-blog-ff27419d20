@@ -46,12 +46,6 @@
     "imdb": {
       "type": "string"
     },
-    "videos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::video.video",
-      "mappedBy": "format"
-    },
     "legacy_id": {
       "type": "integer"
     },
@@ -62,6 +56,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::season.season",
+      "mappedBy": "format"
+    },
+    "videos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::video.video",
       "mappedBy": "format"
     }
   }
