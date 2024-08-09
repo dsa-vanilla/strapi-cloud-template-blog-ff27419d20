@@ -21,4 +21,15 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  "firebase-auth": {
+    enabled: true,
+    config:{ FIREBASE_JSON_ENCRYPTION_KEY: env('FIREBASE_ENCRYPT', 'encryptMe') }
+  },
+  'users-permissions': {
+    config: {
+      jwt: {
+        expiresIn: '1y',
+      },
+    },
+  },
 });
